@@ -44,15 +44,15 @@ public class GamePanel extends JPanel{
         setPreferredSize(size);
     }
 
-    public void changeXDelta(int x){
+    public void changeXDelta(float x){
         this.xDelta += x;
     }
 
-    public void changeYDelta(int y){
+    public void changeYDelta(float y){
         this.yDelta += y;
     }
 
-    public void setRectPos(int x, int y){
+    public void setRectPos(float x, float y){
         this.xDelta = x;
         this.yDelta = y;
     }
@@ -60,6 +60,6 @@ public class GamePanel extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, (int)xDelta, (int)yDelta, 128, 80, null);
     }
 }
