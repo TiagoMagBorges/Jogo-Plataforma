@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
-import static utilz.Constants.Directions.*;
 import static utilz.Constants.PlayerConstants.*;
 
 public class Player extends Entity{
@@ -14,7 +13,7 @@ public class Player extends Entity{
     private int aniIndex, aniTick, aniSpeed = 25;
     private int playerAction = IDLE;
     private boolean left, up, right, down;
-    private boolean moving = false, attacking = false, jumping = false;
+    private boolean moving = false, attacking = false;
     private float playerSpeed = 2.0f;
 
     public Player(float x, float y) {
