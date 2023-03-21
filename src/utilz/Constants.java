@@ -1,4 +1,4 @@
-package utils;
+package utilz;
 
 public class Constants {
     public static class Directions{

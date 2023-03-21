@@ -5,20 +5,21 @@ import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+
+import static utilz.Constants.Directions.*;
+import static utilz.Constants.PlayerConstants.*;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import static utils.Constants.PlayerConstants.*;
-import static utils.Constants.Directions.*;
 
 public class GamePanel extends JPanel{
 
     private MouseInputs mouseInputs;
     private float xDelta = 100;
     private float yDelta = 100;
-    private BufferedImage img;
     private BufferedImage animations[][];
     private int aniTick, aniIndex, aniSpeed = 17;
     private int playerAction = IDLE;
@@ -27,11 +28,11 @@ public class GamePanel extends JPanel{
 
     public GamePanel() {
         mouseInputs = new MouseInputs(this);
-
-        importImg();
         loadAnimation();
         setPanelSize();
         addKeyListener(new KeyboardInputs(this));
+        addMouseListener(mouseInputs);
+        addMouseMotionListener(mouseInputs);
     }
 
     private void loadAnimation(){
@@ -56,25 +57,11 @@ public class GamePanel extends JPanel{
         }
     }
 
-    private void importImg(){
-        InputStream is = getClass().getResourceAsStream("/player00.png");
-
-            try{
-                img = ImageIO.read(is);
-            }catch(IOException e){
-                e.printStackTrace();
-            }finally{
-                try {
-                    is.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-    }
-
     private void setPanelSize(){
         Dimension size = new Dimension(1280, 800);
+        setMinimumSize(size);
         setPreferredSize(size);
+        setMaximumSize(size);
     }
 
     public void setDirection(int direction){
@@ -124,11 +111,15 @@ public class GamePanel extends JPanel{
         }
     }
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+    public void updateGame(){
         updateAnimationTick();
         setAnimation();
         updatePos();
+    }
+
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        
         g.drawImage(animations[playerAction][aniIndex], (int)xDelta, (int)yDelta, 128, 80, null);
     }
 }
