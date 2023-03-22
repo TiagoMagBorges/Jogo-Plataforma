@@ -2,9 +2,6 @@ package entities;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 
 import utilz.LoadSave;
 
@@ -30,7 +27,7 @@ public class Player extends Entity{
     }
 
     public void render(Graphics g){
-        g.drawImage(animations[playerAction][aniIndex], (int)x, (int)y, 256, 160, null);
+        g.drawImage(animations[playerAction][aniIndex], (int)x, (int)y, 128, 80, null);
     }
     
     private void updateAnimationTick() {

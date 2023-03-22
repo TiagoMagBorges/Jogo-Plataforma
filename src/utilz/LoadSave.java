@@ -29,4 +29,21 @@ public class LoadSave {
         }
         return animations;
     }
+
+    public static BufferedImage GetSpriteAtlas(String fileName){
+        BufferedImage img = null;
+        InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
+        try {
+            img = ImageIO.read(is);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                is.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return img;
+    }
 }
