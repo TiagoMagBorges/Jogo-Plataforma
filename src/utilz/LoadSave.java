@@ -7,8 +7,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import main.Game;
-
 public class LoadSave {
     public static BufferedImage[][] GetPlayerAtlas(){
         BufferedImage animations[][] = new BufferedImage[9][6];
@@ -52,9 +50,8 @@ public class LoadSave {
     }
 
     public static int[][] GetLevelData(){
-        int[][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
-		BufferedImage img = GetSpriteAtlas("level_one_data.png");
-
+		BufferedImage img = GetSpriteAtlas("level_one_data_long.png");
+        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
 		for (int j = 0; j < img.getHeight(); j++){
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
