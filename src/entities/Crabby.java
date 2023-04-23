@@ -18,4 +18,34 @@ public class Crabby extends Enemy{
         g.setColor(Color.RED);
         g.drawRect((int)(hitbox.x - xLvlOffset), (int)(hitbox.y), (int)(hitbox.width), (int)(hitbox.height));
     }
+
+    public void update(int[][] lvlData, Player player){
+        updateMove(lvlData, player);
+        updateAnimationTick();
+    }
+
+    private void updateMove(int[][] lvlData, Player player){
+        if(firstUpdate){
+            firstUpdateCheck(lvlData);
+        }
+        if(inAir){
+            updateinAir(lvlData);
+        }else{
+            switch (enemyState) {
+                case IDLE:
+                    newState(RUNNING);;
+                    break;
+                case RUNNING:
+                    if(cansSeePlayer(lvlData, player)){
+                        turnTowardsPlayer(player);
+                    }
+                    if(isPlayerCloseForAttack(player)){
+                        newState(ATTACK);
+                    }
+
+                    move(lvlData);
+                    break;
+            }
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class GameWindow{
 
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gamePanel);
-        jframe.setResizable(false);
+        jframe.setResizable(true);
         jframe.pack();
         jframe.setLocationRelativeTo(null);
         jframe.setVisible(true);
