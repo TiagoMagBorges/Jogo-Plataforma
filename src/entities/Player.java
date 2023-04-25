@@ -2,6 +2,7 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
@@ -74,6 +75,13 @@ public class Player extends Entity{
         //drawHitbox(g, lvlOffset);
         //drawAttackBox(g, lvlOffset);
         drawUI(g);
+    }
+
+    public void setSpawn(Point spawm){
+        this.x = spawm.x;
+        this.y = spawm.y;
+        hitbox.x = x;
+        hitbox.y = y;
     }
 
     private void checkAttack() {
@@ -319,5 +327,9 @@ public class Player extends Entity{
 
     public void setJump(Boolean jump){
         this.jump = jump;
+    }
+
+    public void loadLvlData(){
+
     }
 }
