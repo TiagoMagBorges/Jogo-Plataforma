@@ -7,6 +7,34 @@ public class Constants {
     public static final float GRAVITY = 0.04f * Game.SCALE;
     public static final int ANI_SPEED = 25;
 
+    public static class ObjectConstant{
+        public static final int RED_POTION = 0;
+        public static final int BLUE_POTION = 1;
+        public static final int BARREL = 2;
+        public static final int BOX = 3;
+        public static final int RED_POTION_VALUE = 15;
+        public static final int BLUE_POTION_VALUE = 10;
+        public static final int CONTAINER_WIDTH_DEFAULT = 40;
+        public static final int CONTAINER_HEIGHT_DEFAULT = 30;
+        public static final int CONTAINER_WIDTH = (int)(Game.SCALE * CONTAINER_WIDTH_DEFAULT);
+        public static final int CONTAINER_HEIGHT = (int)(Game.SCALE * CONTAINER_HEIGHT_DEFAULT);
+        public static final int POTION_WIDTH_DEFAULT = 12;
+        public static final int POTION_HEIGHT_DEFAULT = 16;
+        public static final int POTION_WIDTH = (int)(Game.SCALE * POTION_WIDTH_DEFAULT);
+        public static final int POTION_HEIGHT = (int)(Game.SCALE * POTION_HEIGHT_DEFAULT);
+    
+        public static int GetSpriteAmount(int objType){
+            switch (objType) {
+                case RED_POTION, BLUE_POTION:
+                    return 7;
+                case BARREL, BOX:
+                    return 8;
+                default:
+                    return 1;
+            }
+        }
+    }
+
     public static class EnemyConstants{
         public static final int CRABBY = 0;
         public static final int IDLE = 0;
@@ -63,7 +91,6 @@ public class Constants {
         public static final int BIG_CLOUD_HEIGHT_DEFAULT = 101;
         public static final int BIG_CLOUD_WIDTH = (int)(BIG_CLOUD_WIDTH_DEFAULT * Game.SCALE);
         public static final int BIG_CLOUD_HEIGHT = (int)(BIG_CLOUD_HEIGHT_DEFAULT * Game.SCALE);
-    
         public static final int SMALL_CLOUD_WIDTH_DEFAULT = 78;
         public static final int SMALL_CLOUD_HEIGHT_DEFAULT = 24;
         public static final int SMALL_CLOUD_WIDTH = (int)(SMALL_CLOUD_WIDTH_DEFAULT * Game.SCALE);
@@ -122,8 +149,7 @@ public class Constants {
                     return 5;
                 case HIT:
                     return 4;
-                case JUMP:
-                case ATTACK:
+                case JUMP, ATTACK:
                     return 3;
                 case FALLING:
                 default:

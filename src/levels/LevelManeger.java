@@ -3,7 +3,6 @@ package levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import gamestates.Gamestate;
 import main.Game;
 import utilz.LoadSave;

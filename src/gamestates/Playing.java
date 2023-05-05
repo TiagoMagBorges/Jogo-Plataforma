@@ -7,22 +7,22 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
 import entities.EnemyManeger;
 import entities.Player;
 import levels.LevelManeger;
 import main.Game;
+import objects.ObjectManeger;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
-
 import static utilz.Constants.Environment.*;
 
 public class Playing extends State implements Statemethods{
     private Player player;
     private LevelManeger levelManeger;
     private EnemyManeger enemyManeger;
+    private ObjectManeger objectManeger;
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;
     private LevelCompletedOverlay levelCompletedOverlay;
@@ -59,6 +59,7 @@ public class Playing extends State implements Statemethods{
             levelCompletedOverlay.update();
         }else if(!gameOver){
             levelManeger.update();
+            objectManeger.update();
             player.update();
             enemyManeger.update(levelManeger.getCurrentLevel().getLevelData(), player);
             checkCloseToBorder();
@@ -72,6 +73,7 @@ public class Playing extends State implements Statemethods{
         levelManeger.draw(g, xLvelOffset);
         player.render(g, xLvelOffset);
         enemyManeger.draw(g, xLvelOffset);
+        objectManeger.draw(g, xLvelOffset);
         if(paused){
             g.setColor(new Color(0, 0, 0, 150));
             g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
@@ -86,6 +88,7 @@ public class Playing extends State implements Statemethods{
     private void initClasses() {
         levelManeger = new LevelManeger(game);
         enemyManeger = new EnemyManeger(this);
+        objectManeger= new ObjectManeger(this);
         player = new Player(200, 200, (int)(64 * Game.SCALE), (int)(40 * Game.SCALE), this);
         player.setLevelData(levelManeger.getCurrentLevel().getLevelData());
         player.setSpawn(levelManeger.getCurrentLevel().getPlayerSpawn());
@@ -261,5 +264,9 @@ public class Playing extends State implements Statemethods{
 
     public void setLevelCompleted(boolean levelCompleted) {
         this.levelCompleted = levelCompleted;
+    }
+
+    public ObjectManeger getObjectManeger(){
+        return objectManeger;
     }
 }

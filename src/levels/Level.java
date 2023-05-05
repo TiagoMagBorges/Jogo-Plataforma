@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import entities.Crabby;
 import main.Game;
-
 import static utilz.HelpMethods.GetLevelData;
 import static utilz.HelpMethods.GetCrabs;
 import static utilz.HelpMethods.GetPlayerSpawn;

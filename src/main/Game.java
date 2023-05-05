@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Graphics;
-
 import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
