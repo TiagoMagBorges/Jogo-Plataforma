@@ -1,6 +1,7 @@
 package objects;
 
 import gamestates.Playing;
+import levels.Level;
 import utilz.LoadSave;
 import static utilz.Constants.ObjectConstant.*;
 import java.awt.Graphics;
@@ -16,8 +17,6 @@ public class ObjectManeger {
     public ObjectManeger(Playing playing) {
         this.playing = playing;
         loadImgs();
-        potions = new ArrayList<>();
-        containers = new ArrayList<>();
     }
 
     public void update(){
@@ -78,5 +77,10 @@ public class ObjectManeger {
                 containerImgs[i][j] = containerSprite.getSubimage(40 * j, 30 * i, 40, 30);
             }
         }
+    }
+
+    public void loadObjects(Level newLevel) {
+        potions = newLevel.getPotions();
+        containers = newLevel.getContainers();
     }
 }
