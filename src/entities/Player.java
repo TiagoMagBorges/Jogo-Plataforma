@@ -58,6 +58,9 @@ public class Player extends Entity{
         }
         updateAttackBox();
         updatePos();
+        if(moving){
+            checkPotionTouched();
+        }
         if(attacking){
             checkAttack();
         }
@@ -70,6 +73,10 @@ public class Player extends Entity{
         //drawHitbox(g, lvlOffset);
         //drawAttackBox(g, lvlOffset);
         drawUI(g);
+    }
+
+    private void checkPotionTouched() {
+        playing.checkPotionTouched(hitbox);
     }
 
     public void setSpawn(Point spawm){
@@ -85,6 +92,7 @@ public class Player extends Entity{
         }
         attackChecked = true;
         playing.checkEnemyHit(attackBox);
+        playing.checkObjectHit(attackBox);
     }
 
     public void updateAttackBox(){
@@ -237,6 +245,10 @@ public class Player extends Entity{
         }else if(currentHealth >= maxHealth){
             currentHealth = maxHealth;
         }
+    }
+
+    public void changePower(int value){
+        // Adiciona poder.
     }
 
     private void loadAnimation(){

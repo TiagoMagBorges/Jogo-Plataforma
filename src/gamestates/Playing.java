@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 import entities.EnemyManeger;
@@ -132,6 +133,14 @@ public class Playing extends State implements Statemethods{
         }
     }
 
+    public void checkPotionTouched(Rectangle2D.Float hitbox) {
+        objectManeger.checkObjectTouched(hitbox);
+    }
+
+    public void checkObjectHit(Rectangle2D.Float attackBox) {
+        objectManeger.checkObjectHit(attackBox);
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         if(gameOver){
@@ -245,6 +254,7 @@ public class Playing extends State implements Statemethods{
         levelCompleted = false;
         player.resetAll();
         enemyManeger.resetAllEnemies();
+        objectManeger.resetAllObjects();
     }
 
     public void checkEnemyHit(Rectangle2D.Float attackBox) {
