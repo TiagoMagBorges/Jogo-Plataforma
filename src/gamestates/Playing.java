@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 import entities.EnemyManeger;
@@ -139,6 +138,10 @@ public class Playing extends State implements Statemethods{
 
     public void checkObjectHit(Rectangle2D.Float attackBox) {
         objectManeger.checkObjectHit(attackBox);
+    }
+
+    public void checkSpikeTouched(Player p) {
+        objectManeger.checkSpikeTouched(p);
     }
 
     @Override
@@ -279,5 +282,9 @@ public class Playing extends State implements Statemethods{
 
     public ObjectManeger getObjectManeger(){
         return objectManeger;
+    }
+
+    public LevelManeger getLevelManeger() {
+        return levelManeger;
     }
 }

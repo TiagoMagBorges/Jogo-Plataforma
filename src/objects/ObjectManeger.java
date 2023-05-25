@@ -9,11 +9,15 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import entities.Player;
+
 public class ObjectManeger {
     private Playing playing;
     private BufferedImage[][] potionImgs, containerImgs;
+    private BufferedImage spikeImg;
     private ArrayList<Potion> potions;
     private ArrayList<GameContainer> containers;
+    private ArrayList<Spike> spikes;
 
     public ObjectManeger(Playing playing) {
         this.playing = playing;
@@ -36,6 +40,15 @@ public class ObjectManeger {
     public void draw(Graphics g, int xLvlOffset){
         drawPotions(g, xLvlOffset);
         drawContainers(g, xLvlOffset);
+        drawTraps(g, xLvlOffset);
+    }
+
+    public void checkSpikeTouched(Player p){
+        for(Spike s : spikes){
+            if(s.getHitbox().intersects(p.getHitbox())){
+                p.kill();
+            }
+        }
     }
 
     public void checkObjectTouched(Rectangle2D.Float hitbox){
@@ -59,7 +72,7 @@ public class ObjectManeger {
 
     public void checkObjectHit(Rectangle2D.Float attackbox){
         for(GameContainer gc : containers){
-            if(gc.isActive()){
+            if(gc.isActive() && !gc.doAnimation){
                 if(gc.getHitbox().intersects(attackbox)){
                     gc.setAnimation(true);
                     int type = 0;
@@ -97,6 +110,12 @@ public class ObjectManeger {
         }
     }
 
+    private void drawTraps(Graphics g, int xLvlOffset) {
+        for(Spike s : spikes){
+            g.drawImage(spikeImg, (int)(s.getHitbox().x - xLvlOffset), (int)(s.getHitbox().y - s.getyDrawOffset()), SPIKE_WIDTH, SPIKE_HEIGHT, null);
+        }
+    }
+
     private void loadImgs() {
         BufferedImage potionSprite = LoadSave.GetSpriteAtlas("potions_sprites.png");
         potionImgs = new BufferedImage[2][7];
@@ -113,14 +132,18 @@ public class ObjectManeger {
                 containerImgs[i][j] = containerSprite.getSubimage(40 * j, 30 * i, 40, 30);
             }
         }
+
+        spikeImg = LoadSave.GetSpriteAtlas("trap_atlas.png");
     }
 
     public void loadObjects(Level newLevel) {
-        potions = newLevel.getPotions();
-        containers = newLevel.getContainers();
+        potions = new ArrayList<>(newLevel.getPotions());
+        containers = new ArrayList<>(newLevel.getContainers());
+        spikes = newLevel.getSpikes();
     }
 
     public void resetAllObjects() {
+        loadObjects(playing.getLevelManeger().getCurrentLevel());
         for(Potion p : potions){
             p.reset();
         }

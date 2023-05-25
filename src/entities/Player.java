@@ -60,6 +60,7 @@ public class Player extends Entity{
         updatePos();
         if(moving){
             checkPotionTouched();
+            checkSpikeTouched();
         }
         if(attacking){
             checkAttack();
@@ -77,6 +78,10 @@ public class Player extends Entity{
 
     private void checkPotionTouched() {
         playing.checkPotionTouched(hitbox);
+    }
+
+    private void checkSpikeTouched(){
+        playing.checkSpikeTouched(this);
     }
 
     public void setSpawn(Point spawm){
@@ -245,6 +250,10 @@ public class Player extends Entity{
         }else if(currentHealth >= maxHealth){
             currentHealth = maxHealth;
         }
+    }
+
+    public void kill(){
+        currentHealth = 0;
     }
 
     public void changePower(int value){
